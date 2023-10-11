@@ -1,0 +1,18 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+jupyter = "*"
+ipywidgets = "*"
+black = {extras = ["jupyter"], version = "*"}
+pandas = "*"
+numpy = "*"
+ipympl = "*"
+amplify-sched = "*"
+
+[requires]
+python_version = "3"
