@@ -1,0 +1,7 @@
+
+.vscode
+
+**/*.egg-info
+**/__pycache__
+notebooks/.ipynb_checkpoints/*
+Pipfile.lock

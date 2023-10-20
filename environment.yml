@@ -1,0 +1,14 @@
+name: quantum-demo
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - appmode
+  - traitlets<5.10.0
+  - pip
+  - pip:
+      - amplify-sched
+      - numpy
+      - ipywidgets
+      - pandas
+      - ipympl
