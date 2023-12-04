@@ -13,6 +13,7 @@ pandas = "*"
 numpy = "*"
 ipympl = "*"
 amplify-sched = "*"
+networkx = "*"
 
 [requires]
 python_version = "3"
