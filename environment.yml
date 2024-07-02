@@ -7,7 +7,7 @@ dependencies:
   - traitlets<5.10.0
   - pip
   - pip:
-      - amplify-sched
+      - amplify-sched>=0.2.0
       - numpy
       - ipywidgets
       - pandas
