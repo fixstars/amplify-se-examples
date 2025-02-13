@@ -7312,6 +7312,7 @@ a.anchor-link {
                     processEnvironments: true
                 },
                 displayAlign: 'center',
+                messageStyle: 'none',
                 CommonHTML: {
                     linebreaks: {
                     automatic: true
@@ -7570,10 +7571,10 @@ a.anchor-link {
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># ! pip install amplify_sched  # Google Colab 場合、こちらのコメントアウトを外し、amplify_sched をインストールしてください。</span>
 
-<span class="kn">from</span> <span class="nn">amplify_sched</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">itertools</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy.random</span> <span class="k">as</span> <span class="nn">rand</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">amplify_sched</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy.random</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">rand</span>
 </pre></div>
 </div>
 </div>
@@ -7657,7 +7658,7 @@ a.anchor-link {
 <span class="n">df_job1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">pcb_list</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">mounter_list</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">mounter</span> <span class="ow">in</span> <span class="n">mounter_list</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">pcb</span> <span class="ow">in</span> <span class="n">pcb_list</span><span class="p">:</span>
-        <span class="n">df_job1</span><span class="p">[</span><span class="n">mounter</span><span class="p">][</span><span class="n">pcb</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>  <span class="c1"># 10から30の間の乱数</span>
+        <span class="n">df_job1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pcb</span><span class="p">,</span> <span class="n">mounter</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>  <span class="c1"># 10から30の間の乱数</span>
 <span class="n">df_job1</span>
 </pre></div>
 </div>
@@ -7688,7 +7689,7 @@ a.anchor-link {
 <span class="n">df_job2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">pcb_list</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">robot_list</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">robot</span> <span class="ow">in</span> <span class="n">robot_list</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">pcb</span> <span class="ow">in</span> <span class="n">pcb_list</span><span class="p">:</span>
-        <span class="n">df_job2</span><span class="p">[</span><span class="n">robot</span><span class="p">][</span><span class="n">pcb</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span>
+        <span class="n">df_job2</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pcb</span><span class="p">,</span> <span class="n">robot</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span>
             <span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">30</span>
         <span class="p">)</span>  <span class="c1"># 0から30の間の乱数（0はその卓ロボを使わないことを意味する）</span>
 <span class="n">df_job2</span>
@@ -7724,12 +7725,12 @@ a.anchor-link {
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">check</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">check_list</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">operator</span> <span class="ow">in</span> <span class="n">operator_list</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">pcb</span> <span class="ow">in</span> <span class="n">pcb_list</span><span class="p">:</span>
-            <span class="n">df_job3</span><span class="p">[</span><span class="n">check</span><span class="p">,</span> <span class="n">operator</span><span class="p">][</span><span class="n">pcb</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span>
+            <span class="n">df_job3</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pcb</span><span class="p">,</span> <span class="p">(</span><span class="n">check</span><span class="p">,</span> <span class="n">operator</span><span class="p">)]</span> <span class="o">=</span> <span class="n">rand</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span>
                 <span class="n">low</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">30</span>
             <span class="p">)</span>  <span class="c1"># 10から30の間の乱数</span>
     <span class="n">jigs</span> <span class="o">=</span> <span class="n">jig_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">pcb</span> <span class="ow">in</span> <span class="n">pcb_list</span><span class="p">:</span>
-        <span class="n">df_job3</span><span class="p">[</span><span class="n">check</span><span class="p">,</span> <span class="s2">"治具"</span><span class="p">][</span><span class="n">pcb</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+        <span class="n">df_job3</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pcb</span><span class="p">,</span> <span class="p">(</span><span class="n">check</span><span class="p">,</span> <span class="s2">"治具"</span><span class="p">)]</span> <span class="o">=</span> <span class="n">rand</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
             <span class="n">jigs</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">jigs</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span>
         <span class="p">)</span>
 <span class="n">df_job3</span>
@@ -8085,13 +8086,13 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">amplify_sched</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">itertools</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy.random</span> <span class="k">as</span> <span class="nn">rand</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">amplify_sched</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy.random</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">rand</span>
 
 
-<span class="k">def</span> <span class="nf">schedule_print_circuit_board</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">schedule_print_circuit_board</span><span class="p">():</span>
     <span class="c1">#</span>
     <span class="c1"># 問題に現れる要素</span>
     <span class="c1">#</span>
@@ -8133,13 +8134,15 @@ a.anchor-link {
     <span class="n">df_job1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">pcb_list</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">mounter_list</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">mounter</span> <span class="ow">in</span> <span class="n">mounter_list</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">pcb</span> <span class="ow">in</span> <span class="n">pcb_list</span><span class="p">:</span>
-            <span class="n">df_job1</span><span class="p">[</span><span class="n">mounter</span><span class="p">][</span><span class="n">pcb</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>  <span class="c1"># 10から30の間の乱数</span>
+            <span class="n">df_job1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pcb</span><span class="p">,</span> <span class="n">mounter</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span>
+                <span class="n">low</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">30</span>
+            <span class="p">)</span>  <span class="c1"># 10から30の間の乱数</span>
 
     <span class="c1"># 挿入実装（プロセス2）</span>
     <span class="n">df_job2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">pcb_list</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">robot_list</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">robot</span> <span class="ow">in</span> <span class="n">robot_list</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">pcb</span> <span class="ow">in</span> <span class="n">pcb_list</span><span class="p">:</span>
-            <span class="n">df_job2</span><span class="p">[</span><span class="n">robot</span><span class="p">][</span><span class="n">pcb</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span>
+            <span class="n">df_job2</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pcb</span><span class="p">,</span> <span class="n">robot</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span>
                 <span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">30</span>
             <span class="p">)</span>  <span class="c1"># 0から30の間の乱数（0はその卓ロボを使わないことを意味する）</span>
     <span class="c1"># 検査（プロセス3）</span>
@@ -8150,12 +8153,12 @@ a.anchor-link {
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">check</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">check_list</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">operator</span> <span class="ow">in</span> <span class="n">operator_list</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">pcb</span> <span class="ow">in</span> <span class="n">pcb_list</span><span class="p">:</span>
-                <span class="n">df_job3</span><span class="p">[</span><span class="n">check</span><span class="p">,</span> <span class="n">operator</span><span class="p">][</span><span class="n">pcb</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span>
+                <span class="n">df_job3</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pcb</span><span class="p">,</span> <span class="p">(</span><span class="n">check</span><span class="p">,</span> <span class="n">operator</span><span class="p">)]</span> <span class="o">=</span> <span class="n">rand</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span>
                     <span class="n">low</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">30</span>
                 <span class="p">)</span>  <span class="c1"># 10から30の間の乱数</span>
         <span class="n">jigs</span> <span class="o">=</span> <span class="n">jig_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">pcb</span> <span class="ow">in</span> <span class="n">pcb_list</span><span class="p">:</span>
-            <span class="n">df_job3</span><span class="p">[</span><span class="n">check</span><span class="p">,</span> <span class="s2">"治具"</span><span class="p">][</span><span class="n">pcb</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+            <span class="n">df_job3</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pcb</span><span class="p">,</span> <span class="p">(</span><span class="n">check</span><span class="p">,</span> <span class="s2">"治具"</span><span class="p">)]</span> <span class="o">=</span> <span class="n">rand</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
                 <span class="n">jigs</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">jigs</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span>
             <span class="p">)</span>
 
